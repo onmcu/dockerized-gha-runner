@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   worker:
     image: ghcr.io/onmcu/dockerized-gha-runner:latest
@@ -9,11 +9,10 @@ services:
       RUNNER_TOKEN: {{ GITHUB_RUNNER_TOKEN }}
       RUNNER_WORKDIR: /tmp/runner/work
       CONFIGURED_ACTIONS_RUNNER_FILES_DIR: /runner/data
-      RUNNER_SCOPE: 'repo'
       LABELS: linux,x64,gpu,rust
       DISABLE_AUTOMATIC_DEREGISTRATION: true
     volumes:
-      - './data:/runner/data:Z'
-      - './tmp:/tmp/runner:Z'
+      - "./data:/runner/data:Z"
+      - "./tmp:/tmp/runner:Z"
     security_opt:
       - label=disable
