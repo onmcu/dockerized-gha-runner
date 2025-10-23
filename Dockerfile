@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     pkg-config \
     libssl-dev \
+    libudev-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 USER runner
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable \
     && /home/runner/.cargo/bin/rustup component add clippy rustfmt \
-    && /home/runner/.cargo/bin/rustup target add x86_64-unknown-linux-musl
+    && /home/runner/.cargo/bin/rustup target add x86_64-unknown-linux-gnu
 
 # Add Rust to PATH for runner user
 ENV PATH="/home/runner/.cargo/bin:${PATH}"
