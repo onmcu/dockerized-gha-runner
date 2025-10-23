@@ -7,7 +7,10 @@ Build the Dockerfile
 podman build -t github-runner .
 ```
 
-Run with podman-compose
+Or use image from github:
+`ghcr.io/onmcu/dockerized-gha-runner:latest`
+
+Run with podman-compose (maybe adapt image name when using local build)
 ```sh
 podman-compose up -d
 ```
