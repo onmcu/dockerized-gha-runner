@@ -1,4 +1,4 @@
-FROM docker.io/myoung34/github-runner:latest
+FROM docker.io/myoung34/github-runner:2.331.0-ubuntu-focal
 
 USER root
 
