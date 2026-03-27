@@ -14,6 +14,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     buildah \
     git-crypt \
     nodejs \
+    sqlite3 \
     && corepack enable \
     && corepack prepare pnpm@latest --activate \
     && apt-get clean \
