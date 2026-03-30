@@ -35,4 +35,5 @@ RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ca
     && cargo binstall cargo-nextest --no-confirm --no-symlinks \
     && cargo binstall cargo-deny --no-confirm --no-symlinks \
     && cargo binstall just --no-confirm --no-symlinks \
-    && cargo binstall sqlx-cli --no-confirm --no-symlinks
+    && cargo binstall sqlx-cli --no-confirm --no-symlinks \
+    && cargo binstall taplo-cli --no-confirm --no-symlinks
