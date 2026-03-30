@@ -32,8 +32,10 @@ ENV PATH="/home/runner/.cargo/bin:${PATH}"
 
 # Install cargo-binstall via prebuilt binary (cargo install fails on Focal's GCC 9)
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash \
-    && cargo binstall cargo-nextest --no-confirm --no-symlinks \
-    && cargo binstall cargo-deny --no-confirm --no-symlinks \
-    && cargo binstall just --no-confirm --no-symlinks \
+    # These are not (yet) installable with binstall, keeping in extra layer for caching
     && cargo binstall sqlx-cli --no-confirm --no-symlinks \
     && cargo binstall taplo-cli --no-confirm --no-symlinks
+
+RUN cargo binstall cargo-nextest --no-confirm --no-symlinks \
+    && cargo binstall cargo-deny --no-confirm --no-symlinks \
+    && cargo binstall just --no-confirm --no-symlinks
