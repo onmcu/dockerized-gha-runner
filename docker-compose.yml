@@ -2,17 +2,27 @@ version: "3"
 services:
   worker:
     image: ghcr.io/onmcu/dockerized-gha-runner:latest
+    restart: always
+    stop_grace_period: 30s
     environment:
       RUNNER_SCOPE: org
-      RUNNER_ORG: {{ GITHUB_RUNNER_ORG }}
-      RUNNER_NAME: {{ GITHUB_RUNNER_NAME }}
-      RUNNER_TOKEN: {{ GITHUB_RUNNER_TOKEN }}
-      RUNNER_WORKDIR: /tmp/runner/work
+      RUNNER_NAME_PREFIX: selfhosted-runner
+      ORG_NAME: {{ GITHUB_RUNNER_ORG }}
+      ACCESS_TOKEN: {{ GITHUB_RUNNER_TOKEN }}
+      RUNNER_WORKDIR: /tmp/github-runner
       CONFIGURED_ACTIONS_RUNNER_FILES_DIR: /runner/data
       LABELS: linux,x64,gpu,rust
       DISABLE_AUTOMATIC_DEREGISTRATION: true
-    volumes:
-      - "./data:/runner/data:Z"
-      - "./tmp:/tmp/runner:Z"
+      DISABLE_AUTO_UPDATE: true
+      RUN_AS_ROOT: false
+      EPHEMERAL: "true"
     security_opt:
       - label=disable
+    # For rootless podman:
+    # Create these folders and set `chmod o+w` for them and see which UID/GID creates the profiles:
+    # Then `chmod o-w` again and `chown` by that UID/GID
+    volumes:
+      - ./config:/config
+      - ./tmp:/tmp/github-runner
+      - ./cache-cargo-registry:/home/runner/.cargo/registry
+      - ./cache-cargo-git:/home/runner/.cargo/git
