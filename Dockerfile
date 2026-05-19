@@ -1,4 +1,4 @@
-FROM docker.io/myoung34/github-runner:2.332.0-ubuntu-focal
+FROM docker.io/myoung34/github-runner:2.334.0-debian-trixie
 
 USER root
 
