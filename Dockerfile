@@ -1,4 +1,4 @@
-FROM docker.io/myoung34/github-runner:2.334.0-debian-trixie
+FROM docker.io/myoung34/github-runner:2.335.1-debian-trixie
 
 USER root
 
